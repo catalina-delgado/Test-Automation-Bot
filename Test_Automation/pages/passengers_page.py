@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as  EC
 
-class PricePage():
+class PassengersPage():
         
     OPTION_PRICE_BUTTON = (By.XPATH, "//button[contains(@class, 'journey_price_button') and span[contains(text(), ' Seleccionar de tarifa ')]]")
              

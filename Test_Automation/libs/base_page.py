@@ -103,6 +103,7 @@ class BasePage:
     
     def click_element_js(self, by_locator):
         try:
+            print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
             element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(by_locator))
             print('cliclando con js')
             # self.driver.execute_script("arguments[0].click();", element)
