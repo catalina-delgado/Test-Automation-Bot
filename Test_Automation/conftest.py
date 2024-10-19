@@ -6,6 +6,10 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome", help="Browser to run tests on: chrome or firefox")
 
+@pytest.fixture(scope="session")
+def base_url():
+    return "https://nuxqa6.avtest.ink/es/"
+
 @pytest.fixture(scope="class")
 def setup(request):
     path_to_chromedriver = "C:\\Users\\Public\\Documents\\chromedriver-win64\\chromedriver.exe"
@@ -21,5 +25,6 @@ def setup(request):
         raise ValueError(f"Browser {browser} is not supported.")
     
     request.cls.driver = driver
+    driver.maximize_window()
     yield
     driver.quit()
