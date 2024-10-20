@@ -1,13 +1,19 @@
 from pages.home_page import HomePage
 from libs.base_page import BasePage
 
+import time
+
 class BookingFlow(HomePage):
     def __init__(self, driver, base_url):
         super().__init__()
         self.page = BasePage(driver)
         self.page.load_page(base_url)
         self.driver = driver
-        
+    
+    def wait_for_new_page(self):
+        time.sleep(5)
+        # print(f"Redirigido a la página")
+    
     def select_one_way_trip(self):
         # Validar si el checkbox tiene un label que dice "Solo ida"
         one_way_label = self.page.select_element_wait(self.ONE_WAY_LABEL)
@@ -35,12 +41,16 @@ class BookingFlow(HomePage):
         
         is_language_dropdown_present = self.page.select_element_wait(self.LANGUAGE_DROPDOWN)
         dropdown = self.page.visible_element_wait(self.LANGUAGE_DROPDOWN)
-    
-        def language_selected(language):
-            selected_language = self.page.get_text(self.LANGUAGE_TEXT)
-            return selected_language == language
         
-        is_language_selected = language_selected(language)
+        is_option_language_button_present = self.page.select_element_wait(self.LANGUAGE_OPTION_BUTTON)
+        is_option_language_button_clickable = self.page.click_element_wait(self.LANGUAGE_OPTION_BUTTON)
+        language_options = self.page.find_elements(self.LANGUAGE_OPTION_BUTTON)
+        languaje_labels = self.page.find_elements(self.LANGUAGE_LABEL)
+
+        for option, label in zip(language_options, languaje_labels):
+            if label.text == language:
+                option.click() 
+                break
     
     def country_validation(self, pos):
         is_language_button_present = self.page.select_element_wait(self.POS_BUTTON)

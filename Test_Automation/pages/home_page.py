@@ -13,7 +13,8 @@ class HomePage():
     
     LANGUAGE_DROPDOWN = (By.XPATH, "//ul[@class='options-list options-list--type-list']")
     LANGUAGE_BUTTON = (By.XPATH, "//div[@class='language-selector']")
-    LANGUAGE_TEXT = (By.XPATH, "//span[@class='button_label']")
+    LANGUAGE_OPTION_BUTTON = (By.XPATH, "//button[normalize-space(@role)='option']")
+    LANGUAGE_LABEL = (By.XPATH, "//span[@class='button_label']")
     
     POS_BUTTON = (By.XPATH, "//button[@id='pointOfSaleSelectorId']")
     COUNTRY_LIST = (By.XPATH, '//ul[@class="points-of-sale_list"]')

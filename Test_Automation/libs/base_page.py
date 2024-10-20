@@ -52,7 +52,7 @@ class BasePage:
     
     def select_element_wait(self, by_locator):
         # Espera y selecciona el elemento 
-        element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(by_locator))
+        element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(by_locator))
         return element
     
     def visible_element_wait(self, by_locator):
