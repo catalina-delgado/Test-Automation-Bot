@@ -7,7 +7,9 @@ from selenium.webdriver.support import expected_conditions as  EC
 class HomePage():
  
     ONE_WAY_CHECKBOX = (By.ID, "journeytypeId_1")
+    TWO_WAY_CHECKBOX = (By.XPATH, "//input[@id='journeytypeId_0']")
     ONE_WAY_LABEL = (By.XPATH, "//label[@for='journeytypeId_1']/span[text()='Solo ida']")
+    TWO_WAY_LABEL = (By.XPATH, "//label[@for='journeytypeId_0']/span[text()='Ida y vuelta']")
     
     LANGUAGE_DROPDOWN = (By.XPATH, "//ul[@class='options-list options-list--type-list']")
     LANGUAGE_BUTTON = (By.XPATH, "//div[@class='language-selector']")
@@ -35,7 +37,4 @@ class HomePage():
 
     def get_day_button(self, date):
         return (By.XPATH, f"//span[@class='custom-day_day' and normalize-space(text())='{date}']")
-    
-class PassengerInfoPage():
-    passengers = []
     

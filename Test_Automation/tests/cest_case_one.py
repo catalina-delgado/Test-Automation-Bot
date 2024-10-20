@@ -1,8 +1,3 @@
-import pytest
-from libs.base_page import BasePage
-from objects.booking_flow import BookingFlow
-from objects.price_flow import PriceFlow
-
 # Caso automatizado 1: Realizar booking One-way (Solo ida) realizando las
 # siguientes validaciones en cada página.
 # • Home: Seleccionar idioma, pos, origen, destino y 1 pasajero de
@@ -13,6 +8,11 @@ from objects.price_flow import PriceFlow
 # • Seatmap: Seleccionar asiento economy.
 # • Payments: Realizar pago con tarjeta utilizando información fake
 # (No importa que el pago sea rechazado).
+
+import pytest
+from libs.base_page import BasePage
+from objects.booking_flow import BookingFlow
+from objects.price_flow import PriceFlow
 
 @pytest.mark.usefixtures("setup")
 class TestBookingOneWay():
@@ -27,13 +27,14 @@ class TestBookingOneWay():
         texts_for_inputs = ['Manizales', 'Barrancabermeja']
         event.fill_inputs(texts_for_inputs)
         
-        event.select_date_input('24')
+        event.select_date_input(['24'])
         event.passenger_validation()
         
     def test_price(self):
-
+        #Price
         event = PriceFlow(self.driver)
         event.wait_for_new_page()
         event.select_basic_price()
+        event.select_continue()
     
         

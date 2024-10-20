@@ -18,6 +18,16 @@ class BookingFlow(HomePage):
         if not checkbox.is_selected():
             self.page.click_element(self.ONE_WAY_CHECKBOX)
     
+    def select_two_way_trip(self):
+        # Validar si el checkbox tiene un label que dice "Solo ida"
+        two_way_label = self.page.select_element_wait(self.TWO_WAY_LABEL)
+        assert "Ida y vuelta" in two_way_label.text, "El label no dice 'Ida y Vuelta'"
+
+        # Seleccionar el checkbox si no está seleccionado
+        checkbox = self.page.select_element_wait(self.TWO_WAY_CHECKBOX)
+        if not checkbox.is_selected():
+            self.page.click_element(self.TWO_WAY_CHECKBOX)
+    
     def language_validation(self, language):
         is_language_button_present = self.page.select_element_wait(self.LANGUAGE_BUTTON)
         is_language_button_clickable = self.page.click_element_wait(self.LANGUAGE_BUTTON)
@@ -48,12 +58,13 @@ class BookingFlow(HomePage):
     def fill_inputs(self, texts):
         is_origin_inputs_present = self.page.enter_text_element_input(self.CONTROL_INPUT, texts)
     
-    def select_date_input(self, date):
-        located_date_input = self.page.find_element(self.DATE_INPUT)
-        located_date_input.click()
-        
-        is_calendar_visible = self.page.visible_element_wait(self.DATE_CALENDAR)
-        self.page.click_element(self.get_day_button(date))
+    def select_date_input(self, dates):
+        located_date_inputs = self.page.find_elements(self.DATE_INPUT)
+        for located_date_input, date in zip(located_date_inputs, dates):
+            located_date_input.click()
+            
+            is_calendar_visible = self.page.visible_element_wait(self.DATE_CALENDAR)
+            self.page.click_element(self.get_day_button(date))
            
     def validate_http_status(self, url):
         status_code = self.page.get_status_code(url)

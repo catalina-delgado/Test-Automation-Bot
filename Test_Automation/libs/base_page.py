@@ -66,7 +66,6 @@ class BasePage:
         try:
             element = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(by_locator))
             input_value = element.get_attribute('value')
-            print(input_value)
             if input_value:
                 self.driver.execute_script("arguments[0].value = '';", element)  # Limpiar el valor del input
                 element.send_keys(text)
@@ -76,7 +75,6 @@ class BasePage:
         except:
             elements = self.driver.find_elements(*by_locator)
             for element, text in zip(elements, texts):
-                print(f"Input: {element}")
                 self.driver.execute_script("arguments[0].removeAttribute('hidden');", element)
                 element.clear()
                 element.send_keys(text)
@@ -86,7 +84,6 @@ class BasePage:
         try:
             element = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(by_locator))
             input_value = element.get_attribute('value')
-            print(input_value)
             if input_value:
                 self.driver.execute_script("arguments[0].value = '';", element)  # Limpiar el valor del input
             else:
@@ -94,7 +91,6 @@ class BasePage:
         except:
             elements = self.driver.find_elements(*by_locator)
             for element in elements:
-                print(f"Input: {element}")
                 element.click()
                 # self.driver.execute_script("arguments[0].removeAttribute('hidden');", element)
                 # element.clear()
