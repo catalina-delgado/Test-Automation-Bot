@@ -29,6 +29,10 @@ class BasePage:
     def find_elements(self, by_locator):
         return self.driver.find_elements(*by_locator)
 
+    def find_child_elements(self, by_parent_locator, child_tag_name):
+        parent_element = self.driver.find_element(*by_parent_locator)
+        return parent_element.find_elements(By.XPATH, child_tag_name)
+    
     def click_element(self, by_locator):
         self.driver.find_element(*by_locator).click()
         
@@ -116,3 +120,7 @@ class BasePage:
         except requests.exceptions.RequestException as e:
             print(f"Error al hacer la solicitud: {e}")
             return 
+        
+    def scroll_to_element(self, by_locator):
+        element = self.driver.find_element(*by_locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
