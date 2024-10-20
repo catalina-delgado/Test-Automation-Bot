@@ -2,10 +2,6 @@
 # • Utilizar las opciones del Navbar para acceder a 3 sitios diferentes.
 # • Verificar que la url de los sitios cargan correctamente de acuerdo
 # con el idioma y sitio seleccionado.
-# Caso automatizado 6: Redirecciones Footer
-# • Utilizar los links del footer para acceder a 4 sitios diferentes.
-# • Verificar que la url de los sitios cargan correctamente de acuerdo
-# con el idioma y sitio seleccionado.
 
 import pytest
 from libs.base_page import BasePage
@@ -18,18 +14,20 @@ class TestHeader():
     def test_home(self, base_url):
         #Home
         event = BookingFlow(self.driver, base_url)
-        event.select_one_way_trip()
-        event.language_validation('Español')
-        event.country_validation(' Estados Unidos ')
+        event.validate_language('Español')
+        event.validate_country('Estados Unidos')
         
     def test_header(self):
         #Header
         event = HeaderFlow(self.driver)
-        #First validation site
+        
+        #First site validation to links
         event.validate_navbar_link('Reservar')
-        #Second validation Site
+        
+        #Second site validation to buttons on first option menu
         event.validate_navbar_button(index_button=0)
-        #third validation Site
+        
+        #third site validation to buttons on first option menu
         event.validate_navbar_button(index_button=1)
         
         

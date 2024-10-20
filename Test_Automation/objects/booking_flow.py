@@ -1,79 +1,82 @@
 from pages.home_page import HomePage
 from libs.base_page import BasePage
+from libs.base_object import BaseFlow
 
 import time
+import allure
 
 class BookingFlow(HomePage):
     def __init__(self, driver, base_url):
         super().__init__()
         self.page = BasePage(driver)
         self.page.load_page(base_url)
+        self.object = BaseFlow(driver)
         self.driver = driver
     
-    def wait_for_new_page(self):
-        time.sleep(5)
-        # print(f"Redirigido a la página")
-    
     def select_one_way_trip(self):
-        # Validar si el checkbox tiene un label que dice "Solo ida"
         one_way_label = self.page.select_element_wait(self.ONE_WAY_LABEL)
-        assert "Solo ida" in one_way_label.text, "El label no dice 'Solo ida'"
+        assert "Solo ida" in one_way_label.text, "Label does not say One way trip"
 
-        # Seleccionar el checkbox si no está seleccionado
         checkbox = self.page.select_element_wait(self.ONE_WAY_CHECKBOX)
         if not checkbox.is_selected():
             self.page.click_element(self.ONE_WAY_CHECKBOX)
     
-    def select_two_way_trip(self):
-        # Validar si el checkbox tiene un label que dice "Solo ida"
-        two_way_label = self.page.select_element_wait(self.TWO_WAY_LABEL)
-        assert "Ida y vuelta" in two_way_label.text, "El label no dice 'Ida y Vuelta'"
+    def select_round_trip(self):
+        round_label = self.page.select_element_wait(self.ROUND_LABEL)
+        assert "Ida y vuelta" in round_label.text, "Label does not say round trip"
 
-        # Seleccionar el checkbox si no está seleccionado
-        checkbox = self.page.select_element_wait(self.TWO_WAY_CHECKBOX)
+        checkbox = self.page.select_element_wait(self.ROUND_CHECKBOX)
         if not checkbox.is_selected():
-            self.page.click_element(self.TWO_WAY_CHECKBOX)
+            self.page.click_element(self.ROUND_CHECKBOX)
     
-    def language_validation(self, language):
-        is_language_button_present = self.page.select_element_wait(self.LANGUAGE_BUTTON)
-        is_language_button_clickable = self.page.click_element_wait(self.LANGUAGE_BUTTON)
-        self.page.click_element(self.LANGUAGE_BUTTON)
-        
-        is_language_dropdown_present = self.page.select_element_wait(self.LANGUAGE_DROPDOWN)
-        dropdown = self.page.visible_element_wait(self.LANGUAGE_DROPDOWN)
-        
-        is_option_language_button_present = self.page.select_element_wait(self.LANGUAGE_OPTION_BUTTON)
-        is_option_language_button_clickable = self.page.click_element_wait(self.LANGUAGE_OPTION_BUTTON)
-        language_options = self.page.find_elements(self.LANGUAGE_OPTION_BUTTON)
-        languaje_labels = self.page.find_elements(self.LANGUAGE_LABEL)
+    @allure.step("Language Verification")
+    def validate_language(self, language):
+        try:
+            is_language_button_present = self.page.select_element_wait(self.LANGUAGE_BUTTON)
+            self.page.click_element(self.LANGUAGE_BUTTON)
+            
+            is_language_dropdown_present = self.page.select_element_wait(self.LANGUAGE_DROPDOWN)
+            dropdown = self.page.visible_element_wait(self.LANGUAGE_DROPDOWN)
+            
+            is_option_language_button_present = self.page.select_element_wait(self.LANGUAGE_OPTION_BUTTON)
+            language_options = self.page.find_elements(self.LANGUAGE_OPTION_BUTTON)
+            # print(' '.join(option.text for option in language_options))
 
-        for option, label in zip(language_options, languaje_labels):
-            if label.text == language:
-                option.click() 
-                break
+            for option in language_options:
+                if language in option.text:
+                    print(option.text)
+                    option.click() 
+                    break
+                
+            allure.attach(self.driver.get_screenshot_as_png(), name="Language verification", attachment_type=allure.attachment_type.PNG)
+            print(f"Language verification successful for {language}")
+        except Exception as e:
+            allure.attach(self.driver.get_screenshot_as_png(), name="Error screenshot", attachment_type=allure.attachment_type.PNG)
+            raise Exception(f"Error verification: {str(e)}")
     
-    def country_validation(self, pos):
-        is_country_button_present = self.page.select_element_wait(self.POS_BUTTON)
-        is_country_button_clickable = self.page.click_element_wait(self.POS_BUTTON)
-        self.page.click_element(self.POS_BUTTON)
-        
-        is_list_country_present = self.page.select_element_wait(self.COUNTRY_LIST)
-        is_option_country_button_present = self.page.select_element_wait(self.COUNTRY_OPTION_BUTTON)
-        is_option_language_button_clickable = self.page.click_element_wait(self.COUNTRY_OPTION_BUTTON)
-        country_options = self.page.find_elements(self.COUNTRY_OPTION_BUTTON)
-        country_labels = self.page.find_elements(self.COUNTRY_LABEL)
+    @allure.step("Country Verification")    
+    def validate_country(self, pos):
+        try:
+            is_country_button_present = self.page.select_element_wait(self.POS_BUTTON)
+            is_country_button_clickable = self.page.click_element_wait(self.POS_BUTTON)
+            self.page.click_element(self.POS_BUTTON)
+            
+            is_list_country_present = self.page.select_element_wait(self.COUNTRY_LIST)
+            is_option_country_button_present = self.page.select_element_wait(self.COUNTRY_OPTION_BUTTON)
+            country_options = self.page.find_elements(self.COUNTRY_OPTION_BUTTON)
 
-        for option, label in zip(country_options, country_labels):
-            if label.text == pos:
-                option.click() 
-                break
-    
-        # def country_selected(pos):
-        #     selected_country = self.page.get_text(self.LANGUAGE_TEXT)
-        #     return selected_country == pos
+            for option in country_options:
+                if pos in option.text:
+                    print(option.text)
+                    option.click() 
+                    break
         
-        # is_country_selected = country_selected(pos)
-        self.page.click_element(self.APLY_COUNTRY_LIST_BUTTON)
+            self.page.click_element(self.APLY_COUNTRY_LIST_BUTTON)
+            allure.attach(self.driver.get_screenshot_as_png(), name="Country verification", attachment_type=allure.attachment_type.PNG)
+            print(f"Country verification successful for {pos}")
+        except Exception as e:
+            allure.attach(self.driver.get_screenshot_as_png(), name="Error screenshot", attachment_type=allure.attachment_type.PNG)
+            raise Exception(f"Error verification: {str(e)}")
 
     def fill_inputs(self, texts):
         is_origin_inputs_present = self.page.enter_text_element_input(self.CONTROL_INPUT, texts)
@@ -85,20 +88,20 @@ class BookingFlow(HomePage):
             
             is_calendar_visible = self.page.visible_element_wait(self.DATE_CALENDAR)
             self.page.click_element(self.get_day_button(date))
-           
-    def validate_http_status(self, url):
-        status_code = self.page.get_status_code(url)
-        assert status_code == 200, f"HTTP Error: status code {status_code}"
+    
+    @allure.step("Passenger Verification")          
+    def validate_passenger(self):
+        # passenger_button = self.page.find_element(self.PASSENGER_BUTTON)
+        # passenger_button.click()
         
-    def passenger_validation(self):
-        options_list_minus_buttons = self.page.find_elements(self.OPTIONS_LIST_MINUS_BUTTON)
-        options_list_plus_buttons = self.page.find_elements(self.OPTIONS_LIST_PLUS_BUTTON)
+        # options_list_minus_buttons = self.page.find_elements(self.OPTIONS_LIST_MINUS_BUTTON)
+        # options_list_plus_buttons = self.page.find_elements(self.OPTIONS_LIST_PLUS_BUTTON)
         options_list_inputs = self.page.find_elements(self.OPTIONS_LIST_INPUTS)
         
-        # is_button_submit_cliclable=self.page.click_element_wait(self.OPTION_LIST_SUBMIT_BUTTON)
-        # if is_button_submit_cliclable:
-        #     submit_button = self.page.find_element(self.OPTION_LIST_SUBMIT_BUTTON)
-        # else:
+        # container=self.page.find_element(self.SUBMIT_BUTTON_CONTAINER)
+        # # if is_button_submit_cliclable:
+        # submit_button = self.page.find_element(self.OPTION_LIST_SUBMIT_BUTTON)
+        # # else:
         #     self.page.click_element_js(self.OPTION_LIST_SUBMIT_BUTTON)
         #     print('cliclando con js')
             
@@ -112,6 +115,6 @@ class BookingFlow(HomePage):
             
         #     print('vslor del input',input.get_attribute("value"))
         
-        self.page.click_element(self.OPTION_LIST_SUBMIT_BUTTON)
+        # self.page.click_element(self.OPTION_LIST_SUBMIT_BUTTON)
         self.page.click_element(self.SEARCH_BUTTON)
-        self.validate_http_status(self.driver.current_url)
+        self.object.validate_http_status(self.driver.current_url)

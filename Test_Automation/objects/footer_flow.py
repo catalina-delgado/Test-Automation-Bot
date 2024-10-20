@@ -27,7 +27,7 @@ class FooterFlow(FooterPage):
         self.driver.close()
         self.driver.switch_to.window(original_window)
         
-    @allure.step("Verificar enlace")
+    @allure.step("Link verification")
     def validate_footer_link(self, index=0):  
         try:
             navfooter = self.page.find_element(self.NAVFOOTER)
@@ -42,7 +42,7 @@ class FooterFlow(FooterPage):
 
             self.object.wait_for_new_page()
             allure.attach(self.driver.get_screenshot_as_png(), name="Link verification", attachment_type=allure.attachment_type.PNG)
-            print(f"El primer enlace de {link_text} cargó correctamente")
+            print(f"The first link {link_text} loaded correctly")
         except Exception as e:
             allure.attach(self.driver.get_screenshot_as_png(), name="Error screenshot", attachment_type=allure.attachment_type.PNG)
-            raise Exception(f"Error al verificar el enlace: {str(e)}")
+            raise Exception(f"Error verification: {str(e)}")

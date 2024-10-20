@@ -14,8 +14,8 @@ class TestFooter():
     def test_home(self, base_url):
         #Home
         event = BookingFlow(self.driver, base_url)
-        event.language_validation('Español')
-        event.country_validation(' Estados Unidos ')
+        event.validate_language('Español')
+        event.validate_country('Estados Unidos')
         
     def test_footer(self):
         #Footer
@@ -25,19 +25,21 @@ class TestFooter():
         #1 - Sobre nosotros 
         #2 - Nuestros Portales
         #3 - Enlaces rápidos
-        
-        
+                
         #First validation site
         event.scroll_to_footer()
         event.validate_footer_link(index=0)
+        
         #Second validation Site
         event.scroll_to_footer()
         event.validate_footer_link(index=1)
-        # # #third validation Site
+        
+        #third validation Site
         event.scroll_to_footer()
         event.validate_footer_link(index=2)
         event.close_redirected_window()
-        # # #third validation Site
+       
+        #third validation Site
         event.scroll_to_footer()
         event.validate_footer_link(index=3)
         

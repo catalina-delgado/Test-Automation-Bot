@@ -15,11 +15,7 @@ class HeaderFlow(HeaderPage):
         self.object = BaseFlow(driver)
         self.driver = driver
 
-    def load_element(self):
-        # is_navbar_present = self.page.select_element_wait(self.NAVBAR)
-        element = self.page.find_element(self.NAVBAR)
-        
-    @allure.step("Verificar enlace")
+    @allure.step("Link Verification")
     def validate_navbar_link(self, item_link):  
         try:
             is_navbar_present = self.page.select_element_wait(self.NAVBAR)
@@ -31,11 +27,12 @@ class HeaderFlow(HeaderPage):
 
             self.object.wait_for_new_page()
             allure.attach(self.driver.get_screenshot_as_png(), name="Link verification", attachment_type=allure.attachment_type.PNG)
-            print(f"El enlace {item_link} cargó correctamente")
+            print(f"The link {item_link} loaded correctly")
         except Exception as e:
             allure.attach(self.driver.get_screenshot_as_png(), name="Error screenshot", attachment_type=allure.attachment_type.PNG)
-            raise Exception(f"Error al verificar el enlace: {str(e)}")
+            raise Exception(f"Error verification: {str(e)}")
     
+    @allure.step("Button Verification")
     def validate_navbar_button(self, index_button=0):  
         try:
             is_navbar_present = self.page.select_element_wait(self.NAVBAR)
@@ -49,46 +46,13 @@ class HeaderFlow(HeaderPage):
             submenu_options = self.page.find_elements(SUBMENU)
             option = submenu_options[0]
             option.click()
-            # self.driver.execute_script("arguments[0].click();", option)
 
             self.object.validate_http_status(self.driver.current_url)
 
             self.object.wait_for_new_page()
             allure.attach(self.driver.get_screenshot_as_png(), name="Link verification", attachment_type=allure.attachment_type.PNG)
-            print(f"El primer enlace de {button_text} cargó correctamente")
+            print(f"The first link {button_text} loaded correctly")
         except Exception as e:
             allure.attach(self.driver.get_screenshot_as_png(), name="Error screenshot", attachment_type=allure.attachment_type.PNG)
-            raise Exception(f"Error al verificar el enlace: {str(e)}")
+            raise Exception(f"Error verification: {str(e)}")
     
-    def select_flex_price(self):
-        is_fly_button_present = self.page.click_element_wait(self.FLY_BUTTON)
-        if not is_fly_button_present:
-            raise NoSuchElementException(f"La opción para vuelo de vuelta no es visible o no existe.")
-            
-        self.page.click_element(self.FLY_BUTTON)
-        self.page.click_element(self.FLEX_PRICE_BUTTON)
-        self.validate_http_status(self.driver.current_url)
-        print('basic price')
-       
-    def validate_type_fly(self, fly):
-        try:                  
-            if fly == 'Ida':
-                self.select_basic_price() 
-            else:
-                self.select_flex_price()
-        except Exception as e:
-            allure.attach(self.driver.get_screenshot_as_png(), name="Error screenshot", attachment_type=allure.attachment_type.PNG)
-            raise Exception(f"Error interactuando con el elemento: {str(e)}")
-        
-    def select_continue(self):
-        try:
-            self.page.click_element(self.CONTINUE_BUTTON)
-            self.validate_http_status(self.driver.current_url)
-            
-        except ElementNotInteractableException as e:
-            allure.attach(self.driver.get_screenshot_as_png(), name="ElementNotInteractableException screenshot", attachment_type=allure.attachment_type.PNG)
-            raise Exception(f"El elemento no es interactuable o no está habilitado para continuar con las opciones de vuelo")
-        except Exception as e:
-            allure.attach(self.driver.get_screenshot_as_png(), name="Error screenshot", attachment_type=allure.attachment_type.PNG)
-            raise Exception(f"Error interactuando con el elemento: {e.msg}")
-            

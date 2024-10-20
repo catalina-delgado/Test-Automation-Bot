@@ -7,9 +7,9 @@ from selenium.webdriver.support import expected_conditions as  EC
 class HomePage():
  
     ONE_WAY_CHECKBOX = (By.ID, "journeytypeId_1")
-    TWO_WAY_CHECKBOX = (By.XPATH, "//input[@id='journeytypeId_0']")
+    ROUND_CHECKBOX = (By.XPATH, "//input[@id='journeytypeId_0']")
     ONE_WAY_LABEL = (By.XPATH, "//label[@for='journeytypeId_1']/span[text()='Solo ida']")
-    TWO_WAY_LABEL = (By.XPATH, "//label[@for='journeytypeId_0']/span[text()='Ida y vuelta']")
+    ROUND_LABEL = (By.XPATH, "//label[@for='journeytypeId_0']/span[text()='Ida y vuelta']")
     
     LANGUAGE_DROPDOWN = (By.XPATH, "//ul[@class='options-list options-list--type-list']")
     LANGUAGE_BUTTON = (By.XPATH, "//div[@class='language-selector']")
@@ -28,11 +28,15 @@ class HomePage():
     DATE_INPUT = (By.CLASS_NAME, "input-date-picker")
     DATE_CALENDAR = (By.CLASS_NAME, "ngb-dp-month")
     
-    PASSENGER_BUTTON = (By.XPATH, "//button[@class='control_field_button']")  
+    # PASSENGER_BUTTON = (By.CLASS_NAME, 'control_field_button')
+    # PASSENGER_BUTTON = (By.CSS_SELECTOR, "button[aria-label='paxControlSearchId']")
+    PASSENGER_BUTTON = (By.XPATH, "//button[@aria-label='Pasajeros :3']")  
     OPTIONS_LIST = (By.ID, "paxControlSearchId") 
     OPTIONS_LIST_MINUS_BUTTON = (By.CLASS_NAME, "ui-num-ud_button minus") 
     OPTIONS_LIST_PLUS_BUTTON = (By.CLASS_NAME, "ui-num-ud_button plus") 
-    OPTION_LIST_SUBMIT_BUTTON = (By.XPATH, "//button[contains(@class, 'control_options_selector_action_button') and span[contains(text(), 'Confirmar')]]")
+    SUBMIT_BUTTON_CONTAINER = (By.CSS_SELECTOR, '[ngcontent-wou-c11] .control_options_selector_action')
+    OPTION_LIST_SUBMIT_BUTTON = (By.XPATH, "//button[@class='control_options_selector_action_button']//span[normalize-space(text()='Confirmar')]")
+    # OPTION_LIST_SUBMIT_BUTTON = (By.XPATH, "//button[contains(@class, 'control_options_selector_action_button') and span[contains(text(), 'Confirmar')]]")
     OPTIONS_LIST_INPUTS = (By.XPATH, "//div[@class='ui-num-ud_input']/input")
     SEARCH_BUTTON = (By.XPATH, "//button[@id='searchButton']")
                 

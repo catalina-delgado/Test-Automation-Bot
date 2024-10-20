@@ -10,19 +10,20 @@ from objects.price_flow import PriceFlow
 @pytest.mark.usefixtures("setup")
 class TestChangeLanguage():
     #Home
-    def test_spanish_languages(self, base_url):
+    def test_languages(self, base_url):
         event = BookingFlow(self.driver, base_url)
-        event.language_validation('Español')
         
-    def test_english_languages(self, base_url):
-        event = BookingFlow(self.driver, base_url)
-        event.language_validation(' English ')
+        event.validate_language('Español')
+        event.object.wait_for_new_page(timeout=1)
         
-    def test_french_languages(self, base_url):
-        event = BookingFlow(self.driver, base_url)
-        event.language_validation(' Français ')
+        event.validate_language('English')
+        event.object.wait_for_new_page()
+        event.object.wait_for_new_page(timeout=1)
         
-    def test_portuguese_language(self, base_url):
-        event = BookingFlow(self.driver, base_url)
-        event.language_validation(' Português ')
+        event.validate_language('Français')
+        event.object.wait_for_new_page()
+        event.object.wait_for_new_page(timeout=1)
+        
+        event.validate_language('Português')
+        event.object.wait_for_new_page(timeout=1)
         

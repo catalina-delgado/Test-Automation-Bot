@@ -15,13 +15,12 @@ class BaseFlow():
 
     def wait_for_new_page(self, timeout=5):
         time.sleep(timeout)
-        print(f"Redirigido a la página")
     
     def validate_http_status(self, url):
         try:
-            print(f"Verificando la URL: {url}")  # Añadir un mensaje de log
+            print(f"Verifying the URL: {url}")  # Añadir un mensaje de log
             status_code = self.page.get_status_code(url)
-            print(f"Código de estado recibido: {status_code}")  # Log del código de estado
+            print(f"Status code received: {status_code}")  # Log del código de estado
 
             status_code = self.page.get_status_code(url)
             assert status_code == 200, f"HTTP Error: status code {status_code}"

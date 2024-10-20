@@ -17,26 +17,27 @@ from objects.booking_flow import BookingFlow
 from objects.price_flow import PriceFlow
 
 @pytest.mark.usefixtures("setup")
-class TestBookingTwoWay():
+class TestBookingRoundTrip():
     
     def test_home(self, base_url):
-        #Home
+        # #Home
         event = BookingFlow(self.driver, base_url)
-        event.select_two_way_trip()
-        event.language_validation('Español')
-        event.country_validation('Colombia')
+        
+        event.validate_language('Español')
+        event.validate_country('Colombia')
+        event.select_round_trip()
 
         texts_for_inputs = ['Manizales', 'Barrancabermeja']
         event.fill_inputs(texts_for_inputs)
         
-        dates_for_inputs = ['24', '28']
+        dates_for_inputs = ['30', '8']
         event.select_date_input(dates_for_inputs)
-        event.passenger_validation()
+        event.validate_passenger()
         
     def test_price(self):
         #Price
         event = PriceFlow(self.driver)
-        event.wait_for_new_page()
+        event.object.wait_for_new_page()
         event.validate_type_fly('Ida')
         event.validate_type_fly('Vuelta')
         event.select_continue()
