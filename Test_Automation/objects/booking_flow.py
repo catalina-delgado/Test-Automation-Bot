@@ -53,17 +53,27 @@ class BookingFlow(HomePage):
                 break
     
     def country_validation(self, pos):
-        is_language_button_present = self.page.select_element_wait(self.POS_BUTTON)
-        is_language_button_clickable = self.page.click_element_wait(self.POS_BUTTON)
+        is_country_button_present = self.page.select_element_wait(self.POS_BUTTON)
+        is_country_button_clickable = self.page.click_element_wait(self.POS_BUTTON)
         self.page.click_element(self.POS_BUTTON)
+        
         is_list_country_present = self.page.select_element_wait(self.COUNTRY_LIST)
+        is_option_country_button_present = self.page.select_element_wait(self.COUNTRY_OPTION_BUTTON)
+        is_option_language_button_clickable = self.page.click_element_wait(self.COUNTRY_OPTION_BUTTON)
+        country_options = self.page.find_elements(self.COUNTRY_OPTION_BUTTON)
+        country_labels = self.page.find_elements(self.COUNTRY_LABEL)
+
+        for option, label in zip(country_options, country_labels):
+            if label.text == pos:
+                option.click() 
+                break
+    
+        # def country_selected(pos):
+        #     selected_country = self.page.get_text(self.LANGUAGE_TEXT)
+        #     return selected_country == pos
         
-        def country_selected(pos):
-            selected_country = self.page.get_text(self.LANGUAGE_TEXT)
-            return selected_country == pos
-        
-        is_country_selected = country_selected(pos)
-        self.page.click_element(self.CLOSE_COUNTRY_LIST_BUTTON)
+        # is_country_selected = country_selected(pos)
+        # self.page.click_element(self.CLOSE_COUNTRY_LIST_BUTTON)
 
     def fill_inputs(self, texts):
         is_origin_inputs_present = self.page.enter_text_element_input(self.CONTROL_INPUT, texts)

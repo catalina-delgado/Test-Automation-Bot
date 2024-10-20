@@ -18,6 +18,8 @@ class HomePage():
     
     POS_BUTTON = (By.XPATH, "//button[@id='pointOfSaleSelectorId']")
     COUNTRY_LIST = (By.XPATH, '//ul[@class="points-of-sale_list"]')
+    COUNTRY_OPTION_BUTTON = (By.XPATH, "//button[normalize-space(@role)='option']")
+    COUNTRY_LABEL = (By.XPATH, "//span[@class='points-of-sale_list_item_label']/font")
     CLOSE_COUNTRY_LIST_BUTTON = (By.XPATH, '//BUTTON[@class="points-of-sale_header_close-button"]')
     
     ORIGIN_SATATION_SPAN =  (By.XPATH, "//SPAN[@id='originStationSelected']")
