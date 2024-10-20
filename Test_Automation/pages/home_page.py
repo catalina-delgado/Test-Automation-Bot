@@ -21,6 +21,7 @@ class HomePage():
     COUNTRY_OPTION_BUTTON = (By.XPATH, "//button[normalize-space(@role)='option']")
     COUNTRY_LABEL = (By.XPATH, "//span[@class='points-of-sale_list_item_label']/font")
     CLOSE_COUNTRY_LIST_BUTTON = (By.XPATH, '//BUTTON[@class="points-of-sale_header_close-button"]')
+    APLY_COUNTRY_LIST_BUTTON =(By.XPATH, '//button[@class="button points-of-sale_footer_action_button"]')
     
     ORIGIN_SATATION_SPAN =  (By.XPATH, "//SPAN[@id='originStationSelected']")
     CONTROL_INPUT = (By.CLASS_NAME, "control_field_input")

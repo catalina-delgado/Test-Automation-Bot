@@ -73,7 +73,7 @@ class BookingFlow(HomePage):
         #     return selected_country == pos
         
         # is_country_selected = country_selected(pos)
-        # self.page.click_element(self.CLOSE_COUNTRY_LIST_BUTTON)
+        self.page.click_element(self.APLY_COUNTRY_LIST_BUTTON)
 
     def fill_inputs(self, texts):
         is_origin_inputs_present = self.page.enter_text_element_input(self.CONTROL_INPUT, texts)

@@ -1,6 +1,3 @@
-# Caso automatizado 4: Verificar cambio de POS (País)
-# • Seleccionar 3 POS (Otros países, España, Chile).
-# • Verificar que cada cambio de POS se hace correctamente.
 # Caso automatizado 5: Redirecciones Header
 # • Utilizar las opciones del Navbar para acceder a 3 sitios diferentes.
 # • Verificar que la url de los sitios cargan correctamente de acuerdo
@@ -10,24 +7,29 @@
 # • Verificar que la url de los sitios cargan correctamente de acuerdo
 # con el idioma y sitio seleccionado.
 
-
 import pytest
 from libs.base_page import BasePage
+from objects.header_flow import HeaderFlow
 from objects.booking_flow import BookingFlow
-from objects.price_flow import PriceFlow
 
 @pytest.mark.usefixtures("setup")
-class TestChangePOS():
-    #Home
-    def test_spanish_languages(self, base_url):
+class TestHeader():
+    
+    def test_home(self, base_url):
+        #Home
         event = BookingFlow(self.driver, base_url)
-        event.country_validation(' Brasil ')
+        event.select_one_way_trip()
+        event.language_validation('Español')
+        event.country_validation(' Estados Unidos ')
         
-    def test_spain_country(self, base_url):
-        event = BookingFlow(self.driver, base_url)
-        event.country_validation(' España ')
+    def test_header(self):
+        #Header
+        event = HeaderFlow(self.driver)
+        #First validation site
+        event.validate_navbar_link('Reservar')
+        #Second validation Site
+        event.validate_navbar_button(index_button=0)
+        #third validation Site
+        event.validate_navbar_button(index_button=1)
         
-    def test_chile_country(self, base_url):
-        event = BookingFlow(self.driver, base_url)
-        event.country_validation(' Chile ')
         
