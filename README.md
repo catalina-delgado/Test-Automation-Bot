@@ -24,7 +24,7 @@ This repository was developed in the Python3 (3.13) programming language.
 
 Install Python packages within virtual enviroment. To create, execute the command below:
 ```
-python3.13 venv env
+python3.13 -m venv env
 ```
 So, activate it
 ```
