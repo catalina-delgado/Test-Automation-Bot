@@ -42,8 +42,7 @@ FireFox - 131.0.3 (64 bits)
 
 After installing all the Requirements, you must clone the repository using.
 ```
-git clone https://github.com/catalina-delgado/
-TECNICAL-TEST.git
+git clone https://github.com/catalina-delgado/TECNICAL-TEST.git
 ```
 Enter the cloned folder, then enter the "Test_Automation" folder and run the test cases using.
 
