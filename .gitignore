@@ -1,2 +1,6 @@
 \env
+\allure-results
+test_load_page.py
+language_validation.py
 README.md
+main.txt
