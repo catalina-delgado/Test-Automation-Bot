@@ -1,0 +1,9 @@
+Verifying the URL: https://nuxqa6.avtest.ink/es/
+Status code received: 200
+The link Reservar loaded correctly
+Verifying the URL: https://nuxqa6.avtest.ink/es/ofertas-destinos/nuevas-rutas/
+Status code received: 200
+The first link Ofertas y destinos loaded correctly
+Verifying the URL: https://nuxqa6.avtest.ink/es/ofertas-destinos/nuevas-rutas/
+Status code received: 200
+The first link Tu reserva Check-in loaded correctly

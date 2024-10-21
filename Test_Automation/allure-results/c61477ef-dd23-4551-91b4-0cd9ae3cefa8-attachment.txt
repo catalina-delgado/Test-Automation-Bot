@@ -1,0 +1,9 @@
+Brasil
+BRL
+Country verification successful for Brasil
+España
+EUR
+Country verification successful for España
+Chile
+USD
+Country verification successful for Chile

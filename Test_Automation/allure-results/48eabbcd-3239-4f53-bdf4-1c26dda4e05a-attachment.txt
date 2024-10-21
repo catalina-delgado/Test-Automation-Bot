@@ -1,0 +1,12 @@
+Verifying the URL: https://nuxqa6.avtest.ink/es/ofertas-destinos/ofertas-de-vuelos/
+Status code received: 200
+The first link Vuelos baratos loaded correctly
+Verifying the URL: https://nuxqa6.avtest.ink/es/sobre-nosotros/somos-avianca/
+Status code received: 200
+The first link Somos avianca loaded correctly
+Verifying the URL: https://nuxqa6.avtest.ink/es/sobre-nosotros/somos-avianca/
+Status code received: 200
+The first link Programa lifemiles loaded correctly
+Verifying the URL: https://nuxqa6.avtest.ink/es/informacion-legal/informacion-legal/
+Status code received: 200
+The first link Información legal loaded correctly

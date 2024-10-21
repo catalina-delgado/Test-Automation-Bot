@@ -1,0 +1,7 @@
+Español
+Language verification successful for Español
+Colombia
+COP
+Country verification successful for Colombia
+Verifying the URL: https://nuxqa6.avtest.ink/es/booking/select/?origin1=MZL&destination1=EJA&departure1=2024-10-21&adt1=1&tng1=0&chd1=0&inf1=0&origin2=EJA&destination2=MZL&departure2=2024-10-30&adt2=1&tng2=0&chd2=0&inf2=0&currency=COP&posCode=CO
+Status code received: 200

@@ -1,0 +1,8 @@
+Español
+Language verification successful for Español
+English
+Language verification successful for English
+Français
+Language verification successful for Français
+Português
+Language verification successful for Português
