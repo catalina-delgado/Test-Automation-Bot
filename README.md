@@ -35,8 +35,9 @@ Now, install the libraries.
 ## Browsers
 
 Run testing in browsers version below:
-Chrome - 130.0.6723.59 (64 bits)
-FireFox - 131.0.3 (64 bits)
+
+- Chrome - 130.0.6723.59 (64 bits)
+- FireFox - 131.0.3 (64 bits)
 
 ## Execution
 
