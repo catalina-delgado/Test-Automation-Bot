@@ -10,7 +10,7 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="session")
 def base_url():
-    return "https://nuxqa6.avtest.ink/es/"
+    return "https://nuxqa3.avtest.ink/es/"
 
 @pytest.fixture(scope="class")
 def setup(request):

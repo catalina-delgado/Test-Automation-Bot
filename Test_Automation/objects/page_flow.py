@@ -1,11 +1,11 @@
-from pages.home_page import HomePage
+from pages.page_3 import PAge_3
 from libs.base_page import BasePage
 from libs.base_object import BaseFlow
 
 import time
 import allure
 
-class BookingFlow(HomePage):
+class PageFlow(PAge_3):
     def __init__(self, driver, base_url):
         super().__init__()
         self.page = BasePage(driver)
@@ -13,13 +13,9 @@ class BookingFlow(HomePage):
         self.object = BaseFlow(driver)
         self.driver = driver
     
-    def select_one_way_trip(self):
-        one_way_label = self.page.select_element_wait(self.ONE_WAY_LABEL)
+    def select_button_list(self):
+        is_button_list_present = self.page.select_element_wait(self.BUTTON_LIST)
         assert "Solo ida" in one_way_label.text, "Label does not say One way trip"
-
-        checkbox = self.page.select_element_wait(self.ONE_WAY_CHECKBOX)
-        if not checkbox.is_selected():
-            self.page.click_element(self.ONE_WAY_CHECKBOX)
     
     def select_round_trip(self):
         round_label = self.page.select_element_wait(self.ROUND_LABEL)
@@ -88,11 +84,6 @@ class BookingFlow(HomePage):
             
             is_calendar_visible = self.page.visible_element_wait(self.DATE_CALENDAR)
             self.page.click_element(self.get_day_button(date))
-    
-    def select_button_list(self):
-        button_list = self.page.find_element(self.BUTTON_LIST)
-        button_list.click()
-    
     
     @allure.step("Passenger Verification")          
     def validate_passenger(self):

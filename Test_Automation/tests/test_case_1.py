@@ -38,4 +38,3 @@ class TestBookingOneWay():
         event.select_basic_price()
         event.select_continue()
     
-        

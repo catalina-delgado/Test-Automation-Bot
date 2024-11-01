@@ -5,6 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as  EC
 
 class HomePage():
+    
+    BOOTON_LIST = (By.XPATH, "//BUTTON[@role='combobox']")
  
     ONE_WAY_CHECKBOX = (By.ID, "journeytypeId_1")
     ROUND_CHECKBOX = (By.XPATH, "//input[@id='journeytypeId_0']")

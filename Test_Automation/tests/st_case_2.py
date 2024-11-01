@@ -30,7 +30,7 @@ class TestBookingRoundTrip():
         texts_for_inputs = ['Manizales', 'Barrancabermeja']
         event.fill_inputs(texts_for_inputs)
         
-        dates_for_inputs = ['30', '8']
+        dates_for_inputs = ['30', '31']
         event.select_date_input(dates_for_inputs)
         event.validate_passenger()
         
