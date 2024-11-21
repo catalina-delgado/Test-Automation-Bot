@@ -1,8 +1,3 @@
-# Caso automatizado 6: Redirecciones Footer
-# • Utilizar los links del footer para acceder a 4 sitios diferentes.
-# • Verificar que la url de los sitios cargan correctamente de acuerdo
-# con el idioma y sitio seleccionado.
-
 import pytest
 from libs.base_page import BasePage
 from objects.footer_flow import FooterFlow
@@ -20,11 +15,6 @@ class TestFooter():
     def test_footer(self):
         #Footer
         event = FooterFlow(self.driver)
-        
-        #0 - Descubre y compra 
-        #1 - Sobre nosotros 
-        #2 - Nuestros Portales
-        #3 - Enlaces rápidos
                 
         #First validation site
         event.scroll_to_footer()

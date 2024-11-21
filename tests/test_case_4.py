@@ -1,7 +1,3 @@
-# Caso automatizado 4: Verificar cambio de POS (País)
-# • Seleccionar 3 POS (Otros países, España, Chile).
-# • Verificar que cada cambio de POS se hace correctamente.
-
 import pytest
 from libs.base_page import BasePage
 from objects.booking_flow import BookingFlow

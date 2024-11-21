@@ -1,12 +1,3 @@
-# Caso automatizado 3: Verificar cambio de idioma
-# • Seleccionar los 4 idiomas (Español, Inglés, Francés, Portuguese).
-# • Verificar que cada cambio de idioma se hace correctamente.
-
-import pytest
-from libs.base_page import BasePage
-from objects.booking_flow import BookingFlow
-from objects.price_flow import PriceFlow
-
 @pytest.mark.usefixtures("setup")
 class TestChangeLanguage():
     #Home

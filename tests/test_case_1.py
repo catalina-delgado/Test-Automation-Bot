@@ -1,14 +1,3 @@
-# Caso automatizado 1: Realizar booking One-way (Solo ida) realizando las
-# siguientes validaciones en cada página.
-# • Home: Seleccionar idioma, pos, origen, destino y 1 pasajero de
-# cada tipo (Adulto, Joven, Niño e Infante).
-# • Select flight: Seleccionar tarifa Basic.
-# • Passengers: Ingresar la información de los pasajeros.
-# • Services: No seleccionar ninguno.
-# • Seatmap: Seleccionar asiento economy.
-# • Payments: Realizar pago con tarjeta utilizando información fake
-# (No importa que el pago sea rechazado).
-
 import pytest
 from libs.base_page import BasePage
 from objects.booking_flow import BookingFlow

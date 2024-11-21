@@ -1,8 +1,3 @@
-# Caso automatizado 5: Redirecciones Header
-# • Utilizar las opciones del Navbar para acceder a 3 sitios diferentes.
-# • Verificar que la url de los sitios cargan correctamente de acuerdo
-# con el idioma y sitio seleccionado.
-
 import pytest
 from libs.base_page import BasePage
 from objects.header_flow import HeaderFlow
